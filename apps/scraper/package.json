@@ -1,0 +1,28 @@
+{
+  "name": "scraper",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "tsx watch --env-file=.env src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "seed:zips": "tsx --env-file=.env src/geo/seed-zips.ts"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "playwright": "^1.46.0",
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "p-queue": "^8.0.1",
+    "p-retry": "^6.2.0",
+    "undici": "^6.19.0",
+    "csv-parse": "^5.5.6",
+    "zod": "^3.23.8",
+    "pino": "^9.3.2",
+    "@sazaan/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.16.0",
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.0"
+  }
+}
