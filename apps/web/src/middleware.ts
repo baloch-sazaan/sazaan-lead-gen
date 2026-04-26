@@ -29,25 +29,8 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  const isAuthRoute = request.nextUrl.pathname.startsWith('/login')
-
-  if (!user && !isAuthRoute) {
-    const url = request.nextUrl.clone()
-    url.pathname = '/login'
-    return NextResponse.redirect(url)
-  }
-
-  if (user && request.nextUrl.pathname === '/') {
-    const url = request.nextUrl.clone()
-    url.pathname = '/leads'
-    return NextResponse.redirect(url)
-  }
-
-  if (user && isAuthRoute) {
+  // Always redirect root to /leads
+  if (request.nextUrl.pathname === '/') {
     const url = request.nextUrl.clone()
     url.pathname = '/leads'
     return NextResponse.redirect(url)
@@ -55,6 +38,7 @@ export async function middleware(request: NextRequest) {
 
   return supabaseResponse
 }
+
 
 export const config = {
   matcher: [
