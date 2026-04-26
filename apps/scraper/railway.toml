@@ -3,11 +3,6 @@ builder = "DOCKERFILE"
 dockerfilePath = "apps/scraper/Dockerfile"
 
 [deploy]
-startCommand = "pnpm --filter scraper start"
+startCommand = "node apps/scraper/dist/index.js"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 5
-
-[deploy.healthcheck]
-path = "/"
-intervalSeconds = 60
-timeoutSeconds = 10
