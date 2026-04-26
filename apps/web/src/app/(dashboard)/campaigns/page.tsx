@@ -1,5 +1,8 @@
 import { CampaignsTable } from '@/components/campaigns/campaigns-table';
 import { CreateCampaignDialog } from '@/components/campaigns/create-campaign-dialog';
+import { Suspense } from 'react';
+
+export const dynamic = 'force-dynamic';
 
 export default function CampaignsPage() {
   return (
@@ -13,8 +16,11 @@ export default function CampaignsPage() {
       </div>
       
       <div className="space-y-4">
-        <CampaignsTable />
+        <Suspense fallback={<div className="h-96 glass rounded-2xl animate-pulse" />}>
+          <CampaignsTable />
+        </Suspense>
       </div>
     </div>
   );
 }
+

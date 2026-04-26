@@ -4,14 +4,23 @@ import { scrapeYellowPages } from './scrapers/yellow-pages';
 import { dedupAndInsert } from './lib/dedup';
 import { checkWebsiteHealth } from './workers/website-health';
 import { logger } from './lib/logger';
-import type { Database } from '@sazaan/shared';
 
-const supabase = createClient<Database>(
+const supabase = createClient(
   process.env.SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
-export async function runJob(job: Database['public']['Tables']['ingestion_jobs']['Row']) {
+interface IngestionJob {
+  id: string;
+  niche: string;
+  sources: string[];
+  state_code: string | null;
+  city: string | null;
+  zip_code: string | null;
+  zip_radius_miles: number | null;
+}
+
+export async function runJob(job: IngestionJob) {
   await supabase
     .from('ingestion_jobs')
     .update({ status: 'running', started_at: new Date().toISOString() })
@@ -78,7 +87,7 @@ export async function runJob(job: Database['public']['Tables']['ingestion_jobs']
 }
 
 async function resolveSearchTargets(
-  job: Database['public']['Tables']['ingestion_jobs']['Row']
+  job: IngestionJob
 ): Promise<Array<{ city: string; state_code: string; zip?: string }>> {
   // Case 1: ZIP + radius — get all cities within radius
   if (job.zip_code && job.zip_radius_miles) {

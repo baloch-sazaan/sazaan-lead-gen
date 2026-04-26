@@ -1,5 +1,7 @@
 import { JobTriggerForm } from '@/components/jobs/job-trigger-form';
 
+export const dynamic = 'force-dynamic';
+
 export default function JobsPage() {
   return (
     <div className="flex flex-col gap-6">
@@ -17,3 +19,4 @@ export default function JobsPage() {
     </div>
   );
 }
+

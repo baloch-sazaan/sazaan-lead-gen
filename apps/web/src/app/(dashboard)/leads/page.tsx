@@ -3,7 +3,9 @@
 import { LeadsFilters } from '@/components/leads/leads-filters';
 import { LeadsTable } from '@/components/leads/leads-table';
 import { BulkActionsBar } from '@/components/leads/bulk-actions-bar';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
+
+export const dynamic = 'force-dynamic';
 
 export default function LeadsPage() {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -20,14 +22,22 @@ export default function LeadsPage() {
       </div>
 
       <div className="flex flex-col gap-6">
-        <LeadsFilters />
-        <LeadsTable onSelectionChange={setSelectedIds} />
+        <Suspense fallback={<div className="h-20 glass rounded-2xl animate-pulse" />}>
+          <LeadsFilters />
+        </Suspense>
+        
+        <Suspense fallback={<div className="h-96 glass rounded-2xl animate-pulse" />}>
+          <LeadsTable onSelectionChange={setSelectedIds} />
+        </Suspense>
       </div>
 
-      <BulkActionsBar 
-        selectedIds={selectedIds} 
-        onClear={() => setSelectedIds([])} 
-      />
+      <Suspense>
+        <BulkActionsBar 
+          selectedIds={selectedIds} 
+          onClear={() => setSelectedIds([])} 
+        />
+      </Suspense>
     </div>
   );
 }
+
