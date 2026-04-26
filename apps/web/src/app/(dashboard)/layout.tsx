@@ -2,10 +2,9 @@
 
 import React from 'react';
 import { Sidebar, SidebarBody, SidebarLink } from '@/components/aceternity/sidebar';
-import { Users, Briefcase, Megaphone, Settings, Database } from 'lucide-react';
+import { Users, Database, Megaphone, Settings } from 'lucide-react';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-
   const links = [
     {
       label: 'Leads',
@@ -37,7 +36,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <div className="w-8 h-8 rounded-lg bg-accent-primary shrink-0 flex items-center justify-center text-white font-bold text-sm shadow-glow-sm">
               S
             </div>
-            {/* The title visibility is handled by the Sidebar component in a full implementation, but for simplicity we keep it hidden when collapsed */}
           </div>
           
           <div className="flex flex-col gap-1 flex-1">
@@ -45,11 +43,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <SidebarLink key={idx} link={link} />
             ))}
           </div>
-          </div>
+        </div>
       </SidebarBody>
 
       <div className="flex-1 h-full overflow-y-auto p-8 relative">
-        {/* Background ambient glow */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent-primary/10 rounded-full blur-[120px] pointer-events-none" />
         <div className="relative z-10 w-full max-w-7xl mx-auto">
           {children}
