@@ -45,9 +45,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <SidebarLink key={idx} link={link} />
             ))}
           </div>
-          
           </div>
-        </div>
       </SidebarBody>
 
       <div className="flex-1 h-full overflow-y-auto p-8 relative">
