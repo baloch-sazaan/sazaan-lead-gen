@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    serverComponentsExternalPackages: [],
-  },
+  // serverExternalPackages replaces the deprecated serverComponentsExternalPackages
+  serverExternalPackages: [],
   images: {
     remotePatterns: [],
   },
