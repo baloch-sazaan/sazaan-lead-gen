@@ -54,14 +54,14 @@ export function AddToCampaignDialog({
       if (error) throw error;
 
       // Update total leads count in campaign
-      const { data: countData } = await supabase
+      const { count } = await supabase
         .from('campaign_leads')
         .select('lead_id', { count: 'exact', head: true })
         .eq('campaign_id', selectedCampaignId);
 
       await supabase
         .from('campaigns')
-        .update({ total_leads: countData?.length || 0 })
+        .update({ total_leads: count || 0 })
         .eq('id', selectedCampaignId);
 
       toast.success(`Added ${leadIds.length} leads to campaign`);

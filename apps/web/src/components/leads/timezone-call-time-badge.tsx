@@ -1,13 +1,13 @@
 'use client';
 
-import { format, utcToZonedTime } from 'date-fns-tz';
+import { format, toZonedTime } from 'date-fns-tz';
 
 export function TimezoneCallTimeBadge({ timezone }: { timezone: string | null }) {
   if (!timezone) return null;
 
   try {
     const now = new Date();
-    const localTime = utcToZonedTime(now, timezone);
+    const localTime = toZonedTime(now, timezone);
     const hour = localTime.getHours();
 
     let label: string;

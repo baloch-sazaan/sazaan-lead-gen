@@ -115,7 +115,7 @@ export function JobTriggerForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-2 px-4 rounded-lg bg-accent-primary hover:bg-accent-secondary text-white font-medium transition-colors disabled:opacity-50"
+        className="w-full py-2 px-4 rounded-lg bg-accent-primary hover:bg-accent-glow text-white font-medium transition-colors disabled:opacity-50"
       >
         {loading ? 'Starting Job...' : 'Trigger Scraping Job'}
       </button>
